@@ -1,7 +1,7 @@
 
-
 var selectedRow = null;
 const formSubmitButton = document.getElementById("submitData");
+let books = []; 
 
 formSubmitButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -9,16 +9,15 @@ formSubmitButton.addEventListener("click", (e) => {
     if (selectedRow == null) {
         const returnValue = validateForm();
         console.log(returnValue);
-        if (returnValue)
+        if (returnValue) {
             insertNewRecord(formData);
-        else {
+        } else {
             alert("All fields must be filled out");
             return;
         };
     } else {
-        updateRecord(formData);  
+        updateRecord(formData);
     }
-
     validateForm();
     resetForm();
 });
@@ -35,16 +34,25 @@ function readFormData() {
 }
 
 function insertNewRecord(data) {
-    var table = document.getElementById("booklist").getElementsByTagName('tbody')[0];
-    var newRow = table.insertRow(table.length);
-    newRow.insertCell(0).innerHTML = data.name;
-    newRow.insertCell(1).innerHTML = data.author;
-    newRow.insertCell(2).innerHTML = data.isbn;
-    newRow.insertCell(3).innerHTML = data.publisher;
-    newRow.insertCell(4).innerHTML = data.date;
-    newRow.insertCell(5).innerHTML = data.genre;
-    newRow.insertCell(6).innerHTML = `<a href="#" onClick="onEdit(this)">Edit</a> | <a href="#" onClick="onDelete(this)">Delete</a>`;
-    newRow.insertCell(7).innerHTML = ageCalculator(data.date);
+    books.push(data);
+    renderBooks(); 
+}
+
+function renderBooks() {
+    const tableBody = document.getElementById("booklist").getElementsByTagName('tbody')[0];
+    tableBody.innerHTML = ""; 
+    
+    books.forEach(book => {
+        const newRow = tableBody.insertRow();
+        newRow.insertCell(0).innerHTML = book.name;
+        newRow.insertCell(1).innerHTML = book.author;
+        newRow.insertCell(2).innerHTML = book.isbn;
+        newRow.insertCell(3).innerHTML = book.publisher;
+        newRow.insertCell(4).innerHTML = book.date;
+        newRow.insertCell(5).innerHTML = book.genre;
+        newRow.insertCell(6).innerHTML = `<a href="#" onClick="onEdit(this)">Edit</a> | <a href="#" onClick="onDelete(this)">Delete</a>`;
+        newRow.insertCell(7).innerHTML = ageCalculator(book.date);
+    });
 }
 
 function resetForm() {
@@ -80,7 +88,9 @@ function updateRecord(formData) {
 function onDelete(td) {
     if (confirm('Are you sure to delete this record?')) {
         row = td.parentElement.parentElement;
-        document.getElementById("booklist").deleteRow(row.rowIndex);
+        const bookIndex = Array.from(row.parentElement.children).indexOf(row);
+        books.splice(bookIndex, 1);
+        renderBooks(); 
         resetForm();
     }
 }
@@ -114,40 +124,38 @@ function validateForm() {
     const date = document.getElementById("date").value;
     const genre = document.getElementById("genre").value;
 
-    let errorMessages = [];
-
-    if (name === "") {
-        errorMessages.push("Name must be filled out.");
-        return false;
-    }
-    if (author === "") {
-        errorMessages.push("Author must be filled out.");
-        return false;
-    }
-    if (isbn === "") {
-        errorMessages.push("ISBN must be filled out.");
-        return false;
-    } else if (isNaN(isbn)) {
-        errorMessages.push("ISBN should be a valid number and between 10-13 digits.");
-        alert("ISBN should be a valid number");
-        return false;
-    }
-    if (publisher === "") {
-        errorMessages.push("Publisher must be filled out.");
-        return false;
-    }
-    if (date === "") {
-        errorMessages.push("Date must be filled out.");
-        return false;
-    }
-    if (genre === "") {
-        errorMessages.push("Genre must be selected.");
+    if (name === "" || author === "" || isbn === "" || publisher === "" || date === "" || genre === "") {
+        alert("All fields must be filled out.");
         return false;
     }
 
-    if (errorMessages.length > 0) {
-        alert(errorMessages.join("\n"));
-        return false; 
+    if (isNaN(isbn)) {
+        alert("ISBN should be a valid number.");
+        return false;
     }
     return true;
+}
+
+
+function filterBooksByGenre() {
+    const selectedGenre = document.getElementById("filterGenre").value;
+    if (selectedGenre === "all") {
+        renderBooks(); 
+    } else {
+        const filteredBooks = books.filter(book => book.genre === selectedGenre);
+        const tableBody = document.getElementById("booklist").getElementsByTagName('tbody')[0];
+        tableBody.innerHTML = "";
+        
+        filteredBooks.forEach(book => {
+            const newRow = tableBody.insertRow();
+            newRow.insertCell(0).innerHTML = book.name;
+            newRow.insertCell(1).innerHTML = book.author;
+            newRow.insertCell(2).innerHTML = book.isbn;
+            newRow.insertCell(3).innerHTML = book.publisher;
+            newRow.insertCell(4).innerHTML = book.date;
+            newRow.insertCell(5).innerHTML = book.genre;
+            newRow.insertCell(6).innerHTML = `<a href="#" onClick="onEdit(this)">Edit</a> | <a href="#" onClick="onDelete(this)">Delete</a>`;
+            newRow.insertCell(7).innerHTML = ageCalculator(book.date);
+        });
+    }
 }
