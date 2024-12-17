@@ -2,7 +2,6 @@
 
 const general = document.getElementById('categories');
 const tableBody = document.getElementById("books");
-
 const fetchData = async () => {
     try {
         tableBody.innerHTML = '';
@@ -34,6 +33,7 @@ const fetchData = async () => {
         console.log(error);
     }
 }
+fetchData();
 const changeCategory = () => {
     const allData = Array.from(document.getElementsByTagName('tr'));
     allData.forEach(elem => {
@@ -55,3 +55,7 @@ general.addEventListener('change', (e) => {
     changeCategory();
 });
 
+// window.addEventListener('load', (e) => {
+//     e.preventDefault();
+//     fetchData();
+// });

@@ -1,0 +1,42 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./output.css">
+    <title>Book List</title>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <div class="container mx-auto p-6">
+        <div class="mb-6">
+            <label for="genre" class="block mx-a shadow-2xl bg-slate-400 px-4 py-4 text-lg font-semibold text-gray-700 mb-2 hover:bg-blue-300 rounded-md ">Genre:</label>
+            <select id="categories" class="w-full px-4 py-2 border rounded-lg shadow-md bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                <option value="science">Science</option>
+                <option value="all">All</option>
+                <option value="fiction">Fiction</option>
+                <option value="history">History</option>
+                <option value="adventure">Adventure</option>
+                <option value="electronic">Electronic</option>
+            </select>
+        </div>
+    </div>
+    <div class="container mx-auto p-6">
+        <table id="books" class="min-w-full bg-white shadow-lg rounded-lg overflow-hidden">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Name</th>
+                    <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Author</th>
+                    <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">ISBN</th>
+                    <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Publisher</th>
+                    <th class="py-3 px-6 text-left text-sm font-semibold text-gray-700">Genre</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script src="./../js/fetch.js"></script>
+</body>
+</html>
