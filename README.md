@@ -13,7 +13,7 @@ The book's existing details will be pre-filled in the input fields. Make the nec
 
 
 # Technologies Used
-Frontend: HTML, CSS, JavaScript, TailwindCSS
+Frontend: HTML, CSS, JavaScript, TailwindCSS`
 Backend: Node.js, Express.js & LoopBack
 
 
