@@ -1,57 +1,118 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book List</title>
+    
+    <!-- Tailwind CSS for styling -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.2/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./output.css">
+    
     <style>
+        /* Prevent horizontal scrolling */
         body {
             overflow-x: hidden;
         }
     </style>
 </head>
+
 <body class="bg-gray-50 text-gray-800 w-full">
-    <header class="bg-pink-400 text-white py-4 w-full">
-        <div class="mx-auto flex justify-between items-center px-4">
-            <h1 class="text-xl font-bold">Book List</h1>
-            <button id="findBooksBtn" onclick="window.location.href='./fetch.html'" class="text-white hover:text-red-600">Find Books</button>
+
+    <!-- Header Section -->
+    <header class="bg-gradient-to-r from-pink-400 to-red-500 text-white py-6 w-full shadow-lg">
+        <div class="mx-auto flex justify-between items-center px-8 max-w-screen-xl">
+            <h1 class="text-3xl font-extrabold">Book List</h1>
+            <button 
+                id="findBooksBtn" 
+                onclick="window.location.href='./fetch.html'" 
+                class="text-white hover:text-orange-600 text-lg font-semibold py-2 px-4 rounded-lg transition ease-in-out transform hover:scale-105">
+                Find Books
+            </button>
         </div>
     </header>
-    <div class="container mx-auto p-4">
-        <div class="flex flex-wrap justify-between gap-6">
-            <div class=" text-white p-6 rounded-lg w-full sm:w-1/2 sm:bg-red-300 bg-gray-500 lg:w-1/3 lg:bg-pink-300">
-                <h2 class="text-2xl font-semibold mb-4">Add a Book</h2>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-8">
+        <div class="flex flex-wrap justify-between gap-8">
+
+            <!-- Add a Book Card -->
+            <div class="bg-gradient-to-r from-gray-800 via-gray-900 to-black text-white p-6 rounded-lg shadow-2xl w-full sm:w-1/2 lg:w-1/3">
+                <h2 class="text-2xl font-semibold mb-6">Add a Book</h2>
                 <form id="bookForm" autocomplete="off">
-                    <div class="mb-4">
-                        <label for="name">Name:</label>
-                        <input type="text" name="name" placeholder="Enter book name" id="name" class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+                    <!-- Book Name Input -->
+                    <div class="mb-6">
+                        <label for="name" class="block text-lg">Name:</label>
+                        <input 
+                            type="text" 
+                            name="name" 
+                            placeholder="Enter book name" 
+                            id="name" 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     </div>
-                    <div class="mb-4">
-                        <label for="author" class="block">Author:</label>
-                        <input type="text" name="author" id="author" placeholder="Enter the author" class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+
+                    <!-- Author Input -->
+                    <div class="mb-6">
+                        <label for="author" class="block text-lg">Author:</label>
+                        <input 
+                            type="text" 
+                            name="author" 
+                            id="author" 
+                            placeholder="Enter the author" 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     </div>
-                    <div class="mb-4">
-                        <label for="isbn" class="block">ISBN:</label>
-                        <input type="text" name="isbn" id="isbn" placeholder="Enter the ISBN" class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+
+                    <!-- ISBN Input -->
+                    <div class="mb-6">
+                        <label for="isbn" class="block text-lg">ISBN:</label>
+                        <input 
+                            type="text" 
+                            name="isbn" 
+                            id="isbn" 
+                            placeholder="Enter the ISBN" 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     </div>
-                    <div class="mb-4">
-                        <label for="publisher" class="block">Publisher:</label>
-                        <input type="text" name="publisher" id="publisher" placeholder="Enter the publisher" class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+
+                    <!-- Publisher Input -->
+                    <div class="mb-6">
+                        <label for="publisher" class="block text-lg">Publisher:</label>
+                        <input 
+                            type="text" 
+                            name="publisher" 
+                            id="publisher" 
+                            placeholder="Enter the publisher" 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     </div>
-                    <div class="mb-4">
-                        <label for="date" class="block">Date:</label>
-                        <input type="date" name="date" id="date" class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+
+                    <!-- Date Input -->
+                    <div class="mb-6">
+                        <label for="date" class="block text-lg">Date:</label>
+                        <input 
+                            type="date" 
+                            name="date" 
+                            id="date" 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     </div>
-                    <div class="mb-4">
-                        <label for="price" class="block">Price:</label>
-                        <input type="number" name="price" id="price" placeholder="Enter the price" class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+
+                    <!-- Price Input -->
+                    <div class="mb-6">
+                        <label for="price" class="block text-lg">Price:</label>
+                        <input 
+                            type="number" 
+                            name="price" 
+                            id="price" 
+                            placeholder="Enter the price" 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     </div>
-            
-                    <div class="mb-4">
-                        <label for="genre" class="block">Genre:</label>
-                        <select id="genre" name="genre" required class="w-full px-4 py-2 border rounded-lg mt-2 bg-gray-700 text-white">
+
+                    <!-- Genre Selection -->
+                    <div class="mb-6">
+                        <label for="genre" class="block text-lg">Genre:</label>
+                        <select 
+                            id="genre" 
+                            name="genre" 
+                            required 
+                            class="w-full px-4 py-3 border border-gray-600 rounded-lg mt-2 bg-gray-700 text-white focus:outline-none focus:ring-2 focus:ring-pink-500">
                             <option value="fiction">Fiction</option>
                             <option value="non-fiction">Non-fiction</option>
                             <option value="fantasy">Fantasy</option>
@@ -63,14 +124,27 @@
                             <option value="historical">Historical</option>
                         </select>
                     </div>
-                    <div class="mb-4">
-                        <button type="submit" id="submitData" class="text-white p-6 rounded-lg w-full sm:w-1/2 sm:bg-red-400 bg-gray-500 lg:w-1/3 lg:bg-pink-500 hover:bg-blue-500">Submit</button> 
+
+                    <!-- Submit Button -->
+                    <div class="mb-6">
+                        <button 
+                            type="submit" 
+                            id="submitData" 
+                            class="w-full bg-pink-500 text-white py-3 rounded-lg font-semibold hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-pink-500 transition ease-in-out duration-300">
+                            Submit
+                        </button>
                     </div>
                 </form>
             </div>
-            <div class="bg-white p-6 rounded-lg shadow-lg w-full sm:w-1/2 sm:bg-red-300 bg-gray-500 lg:w-2/3 lg:bg-pink-300 ">
+
+            <!-- Book List Card -->
+            <div class="bg-white p-6 rounded-lg shadow-2xl w-full sm:w-1/2 lg:w-2/3">
+                <!-- Genre Filter Dropdown -->
                 <label for="filterGenre" class="block text-xl font-semibold mb-4">Filter by Genre:</label>
-                <select id="filterGenre" onchange="filterBooksByGenre()" class="w-full px-4 py-2 border rounded-lg mb-6 bg-gray-100">
+                <select 
+                    id="filterGenre" 
+                    onchange="filterBooksByGenre()" 
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg mb-8 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-pink-500">
                     <option value="all">All Genres</option>
                     <option value="fiction">Fiction</option>
                     <option value="non-fiction">Non-fiction</option>
@@ -82,29 +156,33 @@
                     <option value="thriller">Thriller</option>
                     <option value="historical">Historical</option>
                 </select>
+
+                <!-- Book List Table -->
                 <div class="overflow-x-auto max-w-full">
-                    <table class="table-auto w-full border-collapse border border-gray-300" id="booklist">
+                    <table class="table-auto w-full border-collapse border border-gray-300 shadow-lg" id="booklist">
                         <thead>
                             <tr class="bg-gray-100">
-                                <th class="py-2 px-4 border-b">Name</th>
-                                <th class="py-2 px-4 border-b">Author</th>
-                                <th class="py-2 px-4 border-b">ISBN</th>
-                                <th class="py-2 px-4 border-b">Publisher</th>
-                                <th class="py-2 px-4 border-b">Date</th>
-                                <th class="py-2 px-4 border-b">Price</th>
-                                <th class="py-2 px-4 border-b">Genre</th>
-                                <th class="py-2 px-4 border-b">Actions</th>
-                                <th class="py-2 px-4 border-b">Age</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Name</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Author</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">ISBN</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Publisher</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Date</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Price</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Genre</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Actions</th>
+                                <th class="py-4 px-6 border-b text-sm font-semibold text-gray-600">Age</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <!-- Dynamic rows will go here -->
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </div>
-    <script src="./../js/main.js"></script>
+
+    <!-- External JS Script -->
+    <script src="./../js/main.js" ></script>
 </body>
 </html>
-
