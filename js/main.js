@@ -25,11 +25,10 @@ class BookManager {
       if (isFormValid) {
         this.addNewBook(formData);
       } else {
-        alert("All fields must be filled out");
         return;
       }
     } else {
-      this.updateBookRecord(formData);
+      if (this.validateForm()) this.updateBookRecord(formData);
     }
     this.resetForm();
   }
@@ -102,6 +101,14 @@ class BookManager {
 
   // Updates the selected book record with the new form data.
   updateBookRecord(bookData) {
+    // Find the index of the book being edited
+    const bookIndex = Array.from(
+      this.selectedRow.parentElement.children
+    ).indexOf(this.selectedRow);
+    // Update the book in the array
+    this.books[bookIndex] = bookData;
+
+    // Update the row in the table
     this.selectedRow.cells[0].innerHTML = bookData.title;
     this.selectedRow.cells[1].innerHTML = bookData.author;
     this.selectedRow.cells[2].innerHTML = bookData.isbn;
@@ -112,6 +119,9 @@ class BookManager {
     this.selectedRow.cells[8].innerHTML = this.calculateAge(
       bookData.publicationDate
     );
+
+    // Reapply the genre filter after the update
+    this.filterBooksByGenre();
   }
 
   // Deletes the selected book record after confirmation.
@@ -157,23 +167,29 @@ class BookManager {
     const bookPrice = document.getElementById("price").value;
     const bookGenre = document.getElementById("genre").value;
 
-    if (
-      bookTitle === "" ||
-      bookAuthor === "" ||
-      bookIsbn === "" ||
-      bookPublisher === "" ||
-      bookPublicationDate === "" ||
-      bookGenre === ""
-    ) {
-      alert("All fields must be filled out.");
+    let errorMessage = "";
+
+    // Check if any required field is empty
+    if (bookTitle === "") errorMessage += "Title is required.\n";
+    if (bookAuthor === "") errorMessage += "Author is required.\n";
+    if (bookIsbn === "") errorMessage += "ISBN is required.\n";
+    if (bookPublisher === "") errorMessage += "Publisher is required.\n";
+    if (bookPublicationDate === "")
+      errorMessage += "Publication Date is required.\n";
+    if (bookGenre === "") errorMessage += "Genre is required.\n";
+
+    // If there's any missing information, show one alert
+    if (errorMessage !== "") {
+      alert("Please fill out the following fields:\n" + errorMessage);
       return false;
     }
 
+    // Check if ISBN is a valid number
     if (isNaN(bookIsbn)) {
-      // Fixed here
       alert("ISBN should be a valid number.");
       return false;
     }
+
     return true;
   }
 
