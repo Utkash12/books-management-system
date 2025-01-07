@@ -225,3 +225,4 @@ class BookManager {
 
 // Initialize the book manager instance.
 const bookManager = new BookManager();
+ 
